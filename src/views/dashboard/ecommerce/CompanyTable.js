@@ -14,7 +14,9 @@ const CompanyTable = () => {
   // ** vars
   const [stats, setStats] = useState([])
   const fetchStats = () => {
-    axios.get(process.env.REACT_APP_API, { params: { stats: true } }).then(res => setStats(res.data))
+    axios
+      .get(process.env.REACT_APP_API, { params: { stats: true } })
+      .then((res) => setStats(res.data))
   }
   useEffect(() => {
     fetchStats()
@@ -110,7 +112,6 @@ const CompanyTable = () => {
   //   Fashion: 'light-warning'
   // }
   const getIcon = (exifs) => {
-
     const icons = [
       {
         subtitle: ['Couverture', 'Toit', 'Charpente'],
@@ -118,7 +119,14 @@ const CompanyTable = () => {
         icon: <Map size={16} />
       },
       {
-        subtitle: ['Plomberie', 'Plombier', 'Eau', 'Robinet', 'Douche', 'Toilette'],
+        subtitle: [
+          'Plomberie',
+          'Plombier',
+          'Eau',
+          'Robinet',
+          'Douche',
+          'Toilette'
+        ],
         color: 'light-info',
         icon: <Tool size={16} />
       },
@@ -134,9 +142,9 @@ const CompanyTable = () => {
       }
     ]
     let out = []
-    icons.forEach(icon => {
-      icon.subtitle = icon.subtitle.map(t => t.toLowerCase())
-      if (exifs.some(item => icon.subtitle.includes(item))) {
+    icons.forEach((icon) => {
+      icon.subtitle = icon.subtitle.map((t) => t.toLowerCase())
+      if (exifs.some((item) => icon.subtitle.includes(item))) {
         out = [icon.icon, icon.color]
       }
     })
@@ -144,66 +152,108 @@ const CompanyTable = () => {
   }
   const renderData = () => {
     if (stats.length > 0) {
-      return stats.map(col => {
-        const exifs = col.exif ? col.exif.toString().split(", ").slice(0, 4) : []
-        const [icon, color] = getIcon(col.exif.toString().trim().split(", "))
+      return stats.map((col) => {
+        const exifs = col.exif ? col.exif.toString().split(', ').slice(0, 4) : []
+        const [icon, color] = getIcon(col.exif.toString().trim().split(', '))
 
-        return (
-          stats.length > 0 ? <tr key={col.id} style={{gridTemplateColumns:"repeat(8, minmax(0, 1fr))", display:"grid"}}>
+        return stats.length > 0 ? (
+          <tr
+            key={col.id}
+            style={{
+              gridTemplateColumns: 'repeat(8, minmax(0, 1fr))',
+              display: 'grid'
+            }}
+          >
             <td>
-              <div className='d-flex align-items-center'>
+              <div className="d-flex align-items-center">
                 <Link to={`/apps/gallery/image/${col.id}`}>
-                  <h5 className='text-primary text-bold cursor-pointer'>#{col.id}</h5>
+                  <h5 className="text-primary text-bold cursor-pointer">
+                    #{col.id}
+                  </h5>
                 </Link>
               </div>
             </td>
             <td>
-              <div className='d-flex align-items-center'>
-                <div className='avatar rounded'>
-                  <div className='avatar-content'>
-                    <Link to={`/apps/gallery/image/${col.id}`} style={{ position: 'absolute', inset: 0 }}>
-                      <img src={process.env.REACT_APP_API + col.thumbnail} style={{ objectFit: 'cover' }} className='w-100 h-100' alt={col.name} />
+              <div className="d-flex align-items-center">
+                <div className="avatar rounded">
+                  <div className="avatar-content">
+                    <Link
+                      to={`/apps/gallery/image/${col.id}`}
+                      style={{ position: 'absolute', inset: 0 }}
+                    >
+                      <img
+                        src={process.env.REACT_APP_API + col.thumbnail}
+                        style={{ objectFit: 'cover' }}
+                        className="w-100 h-100"
+                        alt={col.name}
+                      />
                     </Link>
                   </div>
                 </div>
               </div>
             </td>
-            <td className='text-nowrap' style={{gridColumn:"span 4 / span 4"}}>
-              <div className='d-flex align-items-center'>
-                <Avatar className='me-1' color={color} icon={icon} />
-                <span className='text-light-secondary' style={{textOverflow: "ellipsis", width: "100%", overflow: "hidden"}}>
-                  {exifs.join("").replace(' ', '').length >= 1 ? <>
-                    {exifs.join(", ")}
-                    <Info size={16} className='mx-1 text-muted cursor-pointer' id={`exif-${col.id}`} />
-                    <UncontrolledTooltip placement='right' target={`exif-${col.id}`}>
-                      {col.exif.replace(', ', '\n')}
-                    </UncontrolledTooltip>
-                  </> : "..."
-                  }
+            <td
+              className="text-nowrap"
+              style={{ gridColumn: 'span 4 / span 4' }}
+            >
+              <div className="d-flex align-items-center">
+                <Avatar className="me-1" color={color} icon={icon} />
+                <span
+                  className="text-light-secondary"
+                  style={{
+                    textOverflow: 'ellipsis',
+                    width: '100%',
+                    overflow: 'hidden'
+                  }}
+                >
+                  {exifs.join('').replace(' ', '').length >= 1 ? (
+                    <>
+                      {exifs.join(', ')}
+                      <Info
+                        size={16}
+                        className="mx-1 text-muted cursor-pointer"
+                        id={`exif-${col.id}`}
+                      />
+                      <UncontrolledTooltip
+                        placement="right"
+                        target={`exif-${col.id}`}
+                      >
+                        {col.exif.replace(', ', '\n')}
+                      </UncontrolledTooltip>
+                    </>
+                  ) : (
+                    '...'
+                  )}
                 </span>
               </div>
             </td>
             <td>{col.views}</td>
             <td>
-              <div className='d-flex align-items-center'>
-                <span className='fw-bolder me-1'>{col.downloads}</span>
+              <div className="d-flex align-items-center">
+                <span className="fw-bolder me-1">{col.downloads}</span>
               </div>
             </td>
-          </tr> : <></>
+          </tr>
+        ) : (
+          <></>
         )
-
       })
     }
   }
 
   return (
-    <Card className='card-company-table'>
-      <Table responsive style={{display:"grid"}}>
+    <Card className="card-company-table">
+      <Table responsive style={{ display: 'grid' }}>
         <thead>
-          <tr style={{gridTemplateColumns:"repeat(8, minmax(0, 1fr))", display:"grid"}}>
-            <th>#</th>
+          <tr
+            style={{
+              gridTemplateColumns: 'repeat(8, minmax(0, 1fr))',
+              display: 'grid'
+            }}
+          >
+            <th># ID</th>
             <th>Image</th>
-            <th style={{gridColumn:"span 4 / span 4"}}>Catégorie</th>
+            <th style={{ gridColumn: 'span 4 / span 4' }}>Image Name</th>
             <th>Vues</th>
             <th>Téléchargment</th>
           </tr>

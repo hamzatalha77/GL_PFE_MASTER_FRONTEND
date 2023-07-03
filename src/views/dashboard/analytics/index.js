@@ -84,8 +84,8 @@ const AnalyticsDashboard = () => {
       meta: '',
       metaClassName: 'me-1',
       customContent: (
-        <div className='d-flex align-items-center'>
-          <img className='me-1' src={jsonImg} alt='data.json' height='23' />
+        <div className="d-flex align-items-center">
+          <img className="me-1" src={jsonImg} alt="data.json" height="23" />
           <span>data.json</span>
         </div>
       )
@@ -97,10 +97,10 @@ const AnalyticsDashboard = () => {
       metaClassName: 'me-1',
       color: 'warning',
       customContent: (
-        <div className='d-flex align-items-center'>
+        <div className="d-flex align-items-center">
           <Avatar img={ceo} />
-          <div className='ms-50'>
-            <h6 className='mb-0'>John Doe (Client)</h6>
+          <div className="ms-50">
+            <h6 className="mb-0">John Doe (Client)</h6>
             <span>CEO of Infibeam</span>
           </div>
         </div>
@@ -124,49 +124,55 @@ const AnalyticsDashboard = () => {
   ]
 
   return (
-    <div id='dashboard-analytics'>
-      <Row className='match-height'>
-        <Col lg='6' sm='12'>
+    <div id="dashboard-analytics">
+      <Row className="match-height">
+        <Col lg="6" sm="12">
           <CardCongratulations />
         </Col>
-        <Col lg='3' sm='6'>
+        <Col lg="3" sm="6">
           <SubscribersGained kFormatter={kFormatter} />
         </Col>
-        <Col lg='3' sm='6'>
-          <OrdersReceived kFormatter={kFormatter} warning={colors.warning.main} />
+        <Col lg="3" sm="6">
+          <OrdersReceived
+            kFormatter={kFormatter}
+            warning={colors.warning.main}
+          />
         </Col>
       </Row>
-      <Row className='match-height'>
-        <Col lg='6' xs='12'>
+      <Row className="match-height">
+        <Col lg="6" xs="12">
           <AvgSessions primary={colors.primary.main} />
         </Col>
-        <Col lg='6' xs='12'>
-          <SupportTracker primary={colors.primary.main} danger={colors.danger.main} />
+        <Col lg="6" xs="12">
+          <SupportTracker
+            primary={colors.primary.main}
+            danger={colors.danger.main}
+          />
         </Col>
       </Row>
-      <Row className='match-height'>
-        <Col lg='4' xs='12'>
-          <Card className='card-user-timeline'>
+      <Row className="match-height">
+        <Col lg="4" xs="12">
+          <Card className="card-user-timeline">
             <CardHeader>
-              <div className='d-flex align-items-center'>
-                <List className='user-timeline-title-icon' />
-                <CardTitle tag='h4'>User Timeline</CardTitle>
+              <div className="d-flex align-items-center">
+                <List className="user-timeline-title-icon" />
+                <CardTitle tag="h4">User Timeline</CardTitle>
               </div>
             </CardHeader>
             <CardBody>
-              <Timeline className='ms-50 mb-0' data={data} />
+              <Timeline className="ms-50 mb-0" data={data} />
             </CardBody>
           </Card>
         </Col>
-        <Col lg='4' md='6' xs='12'>
+        <Col lg="4" md="6" xs="12">
           <Sales primary={colors.primary.main} info={colors.info.main} />
         </Col>
-        <Col lg='4' md='6' xs='12'>
+        <Col lg="4" md="6" xs="12">
           <CardAppDesign />
         </Col>
       </Row>
-      <Row className='match-height'>
-        <Col xs='12'>
+      <Row className="match-height">
+        <Col xs="12">
           <InvoiceList />
         </Col>
       </Row>
