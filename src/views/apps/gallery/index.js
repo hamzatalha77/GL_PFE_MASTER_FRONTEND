@@ -189,14 +189,8 @@ const ImageCard = ({ image, block }) => {
                             Télécharger
                         </UncontrolledTooltip>
                     </CardLink>
-                    <CardLink href='/' to={`/apps/gallery/image/${image.id}`} tag={Link} id={`gallery-maximize-${image.id}`}>
-                        <Maximize2 size={18} />
-                        <UncontrolledTooltip target={`gallery-maximize-${image.id}`}>
-                            Afficher
-                        </UncontrolledTooltip>
-                    </CardLink>
-                </div>
-                {/* <CardLink className='ml-auto'> */}
+                 
+                            {/* <CardLink className='ml-auto'> */}
                 <CopyToClipboard onCopy={onCopy} text={`${window.location.origin}/apps/gallery/image/${image.id}`}>
                     <CardLink href='/' className={copied ? 'text-success' : ''} onClick={e => e.preventDefault()} id={`gallery-link-${image.id}`}>
                         <Link2 size={18} />
@@ -206,6 +200,13 @@ const ImageCard = ({ image, block }) => {
                     </CardLink>
                 </CopyToClipboard>
                 {/* </CardLink> */}
+                </div>
+                <CardLink href='/' to={`/apps/gallery/image/${image.id}`} tag={Link} id={`gallery-maximize-${image.id}`}>
+                        <Maximize2 size={18} />
+                        <UncontrolledTooltip target={`gallery-maximize-${image.id}`}>
+                            Afficher
+                        </UncontrolledTooltip>
+                    </CardLink>
             </CardBody>
         </Card>
     </Col>)
