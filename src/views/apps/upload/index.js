@@ -10,6 +10,7 @@ import { X, DownloadCloud, UploadCloud, Check } from 'react-feather'
 // ** Custom Components
 import Avatar from '@components/avatar'
 import ExtensionsHeader from '@components/extensions-header'
+import { useHistory } from 'react-router-dom'
 
 // ** Reactstrap Imports
 import { Row, Col, Card, CardBody, CardText, Progress, CardTitle, Input, Label, Container } from 'reactstrap'
@@ -53,6 +54,7 @@ const ErrorToast = () => {
 }
 
 const Upload = () => {
+    const history = useHistory()
     // ** States
     const [overDrag, setOverDrag] = useState(false)
     const [success, setSuccess] = useState(false)
@@ -95,6 +97,7 @@ const Upload = () => {
                     setTimeout(() => {
                         setSuccess(false)
                     }, 2000)
+                    history.push('/apps/gallery')
                 } else {
                     allow = false
                 }
@@ -115,7 +118,9 @@ const Upload = () => {
                 setTimeout(() => {
                     setError(false)
                 }, 2000)
+               
             }
+         
         }
     })
 
